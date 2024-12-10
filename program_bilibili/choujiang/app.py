@@ -2,6 +2,7 @@
 #需要一个web框架
 #pip install flask
 from flask import Flask,render_template
+from random import randint #randint(0,10)随机生成数字
 #创建一个web应用
 app = Flask(__name__) 
 
@@ -12,7 +13,11 @@ hero = [
 
 @app.route('/index')#设置了一个路线\
 def index():
-    return render_template('index.html')
+    return render_template('index.html',heros = hero)
+@app.route('/choujiang')
+def choujiang():
+    num = randint(0,len(hero)-1)
+    return render_template('index.html',heros = hero,h = hero[num])
 
 app.run(debug=True)
 #方便以后改代码不需要反复的重启应用
